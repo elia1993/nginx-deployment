@@ -1,7 +1,6 @@
 import pulumi
 import pulumi_kubernetes as k8s
 
-# Define Kubernetes resources
 nginx_deployment = k8s.apps.v1.Deployment(
     "nginx-deployment",
     metadata={
@@ -18,7 +17,7 @@ nginx_deployment = k8s.apps.v1.Deployment(
                 "containers": [
                     {
                         "name": "nginx",
-                        "image": "nginx-alpine",  # Use the Docker image you built
+                        "image": "nginx-alpine",
                         "ports": [{"containerPort": 80}],
                         "resources": {
                             "requests": {"cpu": "0.1", "memory": "64Mi"},
@@ -48,10 +47,10 @@ nginx_service = k8s.core.v1.Service(
     },
 )
 
-# Export the service IP
+
 pulumi.export("nginx-service-ip", nginx_service.spec["clusterIP"])
 
-# Define a PVC (Persistent Volume Claim) if needed
 
-# Create a Pulumi stack and set config values if needed
+
+
 pulumi.export("namespace", "default")
